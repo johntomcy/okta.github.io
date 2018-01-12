@@ -260,19 +260,32 @@ The entity upon which an actor performs an action. Targets may be anything: an a
 
 ### Client Object
 
-Describes the client performing the action.
+When an event is triggered by an HTTP request, the **Client Object** will describe the [client](https://en.wikipedia.org/wiki/Category:Hypertext_Transfer_Protocol_clients) that issues that HTTP request. For instance, the web browser is the client when a user accesses the Okta webapp. When this request is received and processed by the servers, a login event is fired. When the event is not sourced to an http request, such as in the case of an automatic update on the Okta servers, the **Client Object** field will be left blank.
 
-|------------+--------------------------------------------------------------+-----------------+----------|
-| Property   | Description                                                  | DataType        | Nullable |
-| ---------- | ------------------------------------------------------------ | --------------- | -------- |
-| userAgent  | The user agent used by an actor to perform an action         | String          | TRUE     |
-| geographicalContext | Geographical context data of the event              | [GeographicalContext Object](#geographicalcontext-object) | TRUE |
-| zone       | Zone where the client is located                             | String          | TRUE     |
-| ipAddress  | Ip address of the client                                     | String          | TRUE     |
-| device     | Device that the client operated from                         | String          | TRUE     |
-| id         | ID of the client                                             | String          | TRUE     |
-| ipChain    | Describes IP addresses used to perform an action             | Array of [IpAddress](#ipaddress-object) | TRUE  |
-|------------+--------------------------------------------------------------+-----------------+----------|
+|------------+------------------------------------------------------------------------------------------+-----------------+----------|
+| Property   | Description                                                                              | DataType        | Nullable |
+| ---------- | ---------------------------------------------------------------------------------------- | --------------- | -------- |
+| userAgent  | The [user agent](https://en.wikipedia.org/wiki/User_agent) used by an actor to perform an action | [UserAgent Object](#useragent-object) | TRUE |
+| geographicalContext | The physical location where the client made its request from | [GeographicalContext Object](#geographicalcontext-object) | TRUE |
+| zone       | [Zone](/docs/api/resources/zones.html) where the client is located                       | String          | TRUE     |
+| ipAddress  | Ip address that the client made its request from                                         | String          | TRUE     |
+| device     | Type of device that the client operated from (e.g. Computer)                             | String          | TRUE     |
+| ipChain    | If the incoming request passes through any proxies, the IP addresses of those proxies will be stored here in the format (clientIp, proxy1, proxy2, ...). This field is useful when working with trusted proxies.                             | Array of [IpAddress](#ipaddress-object) | TRUE |
+|------------+------------------------------------------------------------------------------------------+-----------------+----------|
+
+### UserAgent Object
+
+"A user agent is software (a software agent) that is acting on behalf of a user." ([Wikipedia](https://en.wikipedia.org/wiki/User_agent))
+
+In the Okta event data model, the UserAgent object provides specifications about the client software that makes event-triggering HTTP requests. User agent identification is often useful for identifying interoperability problems between servers and clients, and also for browser and operating system usage analytics.
+
+|--------------+---------------------------------------------------------------------------------------------------+----------------+----------|
+| Property     | Description                                                                                       | DataType       | Nullable |
+| ------------ | ------------------------------------------------------------------------------------------------- | -------------- | -------- |
+| Browser      | If the client is a web browser, this field identifies the type of web browser (e.g. CHROME, FIREFOX) | String      | TRUE     |
+| OS           | The [Operating System](https://en.wikipedia.org/wiki/Operating_system) the client runs on (e.g. Windows 10) | String | TRUE   |
+| RawUserAgent | A raw String representation of the user agent, formatted according to [section 5.5.3 of HTTP/1.1 Semantics and Content](https://tools.ietf.org/html/rfc7231#section-5.5.3)                                                                                             | String         | TRUE     |
+|--------------+---------------------------------------------------------------------------------------------------+----------------+----------|
 
 ### GeographicalContext Object
 

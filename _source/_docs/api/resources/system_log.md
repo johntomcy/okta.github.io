@@ -312,14 +312,14 @@ Geographical Context describes a set of geographic coordinates. In addition to c
 
 ### Geolocation Object
 
-Latitude and longitude of the geolocation where an action was performed, formatted according to the [ISO-6709](https://en.wikipedia.org/wiki/ISO_6709) standard. The latitude uses 2 digits for its integer part and the longitude uses 3 digits for its integer part.
+Latitude and longitude of the geolocation where an action was performed, formatted according to the [ISO-6709](https://en.wikipedia.org/wiki/ISO_6709) standard.
 
-|------------+----------------------------------------------------------------+-----------------+----------|
-| Property   | Description                                                    | DataType        | Nullable |
-| ---------- | -------------------------------------------------------------- | --------------- | -------- |
-| lat        | Latitude                                                       | Double          | FALSE    |
-| lon        | Longitude                                                      | Double          | FALSE    |
-|------------+----------------------------------------------------------------+-----------------+----------|
+|------------+---------------------------------------------------------------------------------------------------+-----------------+----------|
+| Property   | Description                                                                                       | DataType        | Nullable |
+| ---------- | ------------------------------------------------------------------------------------------------- | --------------- | -------- |
+| lat        | Latitude. Uses 2 digits for the [integer part](https://en.wikipedia.org/wiki/ISO_6709#Latitude)   | Double          | FALSE    |
+| lon        | Longitude. Uses 3 digits for the [integer part](https://en.wikipedia.org/wiki/ISO_6709#Longitude) | Double          | FALSE    |
+|------------+---------------------------------------------------------------------------------------------------+-----------------+----------|
 
 ### Outcome Object
 
